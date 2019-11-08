@@ -9,10 +9,9 @@ gem 'puma', '~> 3.11'
 gem 'bootsnap', '>= 1.4.2', require: false
 
 group :development, :test do
-    gem 'database_cleaner'
-    gem 'factory_bot'
+    gem 'factory_bot_rails'
     gem 'faker', require: false
-    gem 'pry'
+    gem 'pry-rails'
     gem 'rspec-rails'
     gem 'rubocop', require: false
     gem 'rubocop-performance'
