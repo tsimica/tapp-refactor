@@ -1,8 +1,13 @@
 FactoryBot.define do
-  factory :user do
-    utorid { "MyString" }
-    role { "" }
-  end
+    factory :user do
+        utorid { "utorid#{Faker::Number.number(digits: 2)}" }
+        trait :admin do
+            role { 'admin' }
+        end
+        trait :instructor do
+            role { 'instructor' }
+        end
+    end
 end
 
 # == Schema Information

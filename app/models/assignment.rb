@@ -7,16 +7,16 @@ end
 #
 # Table name: assignments
 #
-#  id                 :integer          not null, primary key
-#  position_id        :integer          not null
-#  applicant_id       :integer          not null
-#  contract_start     :datetime
-#  contract_end       :datetime
-#  note               :text
-#  offer_override_pdf :string
-#  created_at         :datetime         not null
-#  updated_at         :datetime         not null
-#  active_offer_id    :integer
+#  id                  :integer          not null, primary key
+#  position_id         :integer          not null
+#  applicant_id        :integer          not null
+#  contract_start_date :datetime
+#  contract_end_date   :datetime
+#  note                :text
+#  offer_override_pdf  :string
+#  created_at          :datetime         not null
+#  updated_at          :datetime         not null
+#  active_offer_id     :integer
 #
 # Indexes
 #

@@ -3,8 +3,8 @@ class CreateAssignments < ActiveRecord::Migration[6.0]
     create_table :assignments do |t|
       t.references :position, null: false, foreign_key: true
       t.references :applicant, null: false, foreign_key: true
-      t.datetime :contract_start
-      t.datetime :contract_end
+      t.datetime :contract_start_date
+      t.datetime :contract_end_date
       t.text :note
       t.string :offer_override_pdf
 

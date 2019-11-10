@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_10_204012) do
+ActiveRecord::Schema.define(version: 2019_11_10_222727) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,8 +53,8 @@ ActiveRecord::Schema.define(version: 2019_11_10_204012) do
   create_table "assignments", force: :cascade do |t|
     t.bigint "position_id", null: false
     t.bigint "applicant_id", null: false
-    t.datetime "contract_start"
-    t.datetime "contract_end"
+    t.datetime "contract_start_date"
+    t.datetime "contract_end_date"
     t.text "note"
     t.string "offer_override_pdf"
     t.datetime "created_at", precision: 6, null: false
@@ -64,6 +64,15 @@ ActiveRecord::Schema.define(version: 2019_11_10_204012) do
     t.index ["applicant_id"], name: "index_assignments_on_applicant_id"
     t.index ["position_id", "applicant_id"], name: "index_assignments_on_position_id_and_applicant_id", unique: true
     t.index ["position_id"], name: "index_assignments_on_position_id"
+  end
+
+  create_table "contract_templates", force: :cascade do |t|
+    t.bigint "session_id", null: false
+    t.string "template_name"
+    t.string "template_file"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["session_id"], name: "index_contract_templates_on_session_id"
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -140,25 +149,17 @@ ActiveRecord::Schema.define(version: 2019_11_10_204012) do
     t.index ["position_id"], name: "index_position_preferences_on_position_id"
   end
 
-  create_table "position_templates", force: :cascade do |t|
-    t.bigint "session_id", null: false
-    t.string "position_type"
-    t.string "offer_template"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["session_id"], name: "index_position_templates_on_session_id"
-  end
-
   create_table "positions", force: :cascade do |t|
     t.bigint "session_id", null: false
     t.string "position_code"
     t.string "position_title"
-    t.float "est_hours_per_assignment"
-    t.datetime "est_start_date"
-    t.datetime "est_end_date"
-    t.string "position_type"
+    t.float "hours_per_assignment"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "contract_template_id"
+    t.index ["contract_template_id"], name: "index_positions_on_contract_template_id"
     t.index ["session_id"], name: "index_positions_on_session_id"
   end
 
@@ -208,12 +209,13 @@ ActiveRecord::Schema.define(version: 2019_11_10_204012) do
   add_foreign_key "assignments", "applicants"
   add_foreign_key "assignments", "offers", column: "active_offer_id"
   add_foreign_key "assignments", "positions"
+  add_foreign_key "contract_templates", "sessions"
   add_foreign_key "offers", "assignments"
   add_foreign_key "position_data_for_ads", "positions"
   add_foreign_key "position_data_for_matchings", "positions"
   add_foreign_key "position_preferences", "applications"
   add_foreign_key "position_preferences", "positions"
-  add_foreign_key "position_templates", "sessions"
+  add_foreign_key "positions", "contract_templates"
   add_foreign_key "positions", "sessions"
   add_foreign_key "reporting_tags", "positions"
   add_foreign_key "reporting_tags", "wage_chunks"
