@@ -17,7 +17,10 @@ require 'support/factory_bot'
 require 'database_cleaner'
 require 'simplecov'
 
-SimpleCov.start
+SimpleCov.start do
+    add_filter "/spec/"
+    add_filter "/config/"
+end
 
 RSpec.configure do |config|
     # rspec-expectations config goes here. You can use an alternate
