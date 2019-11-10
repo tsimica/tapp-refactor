@@ -1,0 +1,2 @@
+class PositionTemplate < ApplicationRecord
+end
