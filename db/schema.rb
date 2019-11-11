@@ -175,13 +175,12 @@ ActiveRecord::Schema.define(version: 2019_11_10_222727) do
 
   create_table "sessions", force: :cascade do |t|
     t.datetime "start_date"
-    t.datetime "end_time"
-    t.string "name", null: false
+    t.datetime "end_date"
+    t.string "name"
     t.float "rate1"
     t.float "rate2"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["name"], name: "index_sessions_on_name", unique: true
   end
 
   create_table "users", force: :cascade do |t|
