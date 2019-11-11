@@ -158,7 +158,7 @@ ActiveRecord::Schema.define(version: 2019_11_10_222727) do
     t.datetime "end_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "contract_template_id"
+    t.bigint "contract_template_id", null: false
     t.index ["contract_template_id"], name: "index_positions_on_contract_template_id"
     t.index ["session_id"], name: "index_positions_on_session_id"
   end
