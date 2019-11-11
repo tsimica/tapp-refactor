@@ -2,10 +2,10 @@ FactoryBot.define do
     factory :user do
         utorid { "utorid#{Faker::Number.number(digits: 2)}" }
         trait :admin do
-            role { 'admin' }
+            role { :admin }
         end
         trait :instructor do
-            role { 'instructor' }
+            role { :instructor }
         end
     end
 end

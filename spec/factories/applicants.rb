@@ -1,12 +1,12 @@
 FactoryBot.define do
-  factory :applicant do
-    utorid { "MyString" }
-    student_number { "MyString" }
-    first_name { "MyString" }
-    last_name { "MyString" }
-    email { "MyString" }
-    phone { "MyString" }
-  end
+    factory :applicant do
+        utorid { Faker::Internet.slug("#{last_name} #{first_name} #{Faker::Number.number(2)}", '') }
+        student_number { Faker::Number.number(10) }
+        first_name { Faker::Name.first_name }
+        last_name { Faker::Name.last_name }
+        email { Faker::Internet.email("#{first_name} #{last_name}", '') }
+        phone { Faker::Number.number(10) }
+    end
 end
 
 # == Schema Information
