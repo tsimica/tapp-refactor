@@ -17,7 +17,7 @@ describe Api::V1::SessionsController do
             expect(response.status).to eq(200)
             payload = JSON.parse(response.body)['payload']
             expect(payload).to be_an_instance_of(Array)
-            expect(payload.first).to eq(session.as_json)
+            expect(payload.first).to eq(session.as_json(only: [:end_date, :id, :start_date, :name]))
         end
     end
 
