@@ -1,7 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Session, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+    describe 'associations' do
+        it { should have_many(:applications) }
+        it { should have_many(:contract_templates) }
+        it { should have_many(:positions) }
+    end
+
+    describe 'validations' do
+        it { should validate_numericality_of(:rate1) }
+        it { should validate_numericality_of(:rate2) }
+        it { should validate_uniqueness_of(:name) }
+    end
 end
 
 # == Schema Information
@@ -10,14 +20,10 @@ end
 #
 #  id         :integer          not null, primary key
 #  start_date :datetime
-#  end_time   :datetime
-#  name       :string           not null
+#  end_date   :datetime
+#  name       :string
 #  rate1      :float
 #  rate2      :float
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#
-# Indexes
-#
-#  index_sessions_on_name  (name) UNIQUE
 #
