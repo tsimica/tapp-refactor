@@ -3,6 +3,7 @@
 # responds with json and HTTP code status
 module Response
     def render_success(payload)
+        payload = ActiveModelSerializers::SerializableResource.new(payload)
         render json: { status: 'success', message: '', payload: payload }
     end
 
