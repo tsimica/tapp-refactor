@@ -20,7 +20,7 @@ ActiveRecord::Schema.define(version: 2019_11_10_222727) do
     t.bigint "application_id", null: false
     t.string "program"
     t.string "department"
-    t.text "previous_uoft_ta_experience"
+    t.text "previous_uoft_experience"
     t.integer "yip"
     t.string "annotation"
     t.datetime "created_at", precision: 6, null: false

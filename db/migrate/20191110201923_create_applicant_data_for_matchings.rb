@@ -5,7 +5,7 @@ class CreateApplicantDataForMatchings < ActiveRecord::Migration[6.0]
       t.references :application, null: false, foreign_key: true
       t.string :program
       t.string :department
-      t.text :previous_uoft_ta_experience
+      t.text :previous_uoft_experience
       t.integer :yip
       t.string :annotation
 

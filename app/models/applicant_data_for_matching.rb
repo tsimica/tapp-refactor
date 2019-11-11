@@ -7,16 +7,16 @@ end
 #
 # Table name: applicant_data_for_matchings
 #
-#  id                          :integer          not null, primary key
-#  applicant_id                :integer          not null
-#  application_id              :integer          not null
-#  program                     :string
-#  department                  :string
-#  previous_uoft_ta_experience :text
-#  yip                         :integer
-#  annotation                  :string
-#  created_at                  :datetime         not null
-#  updated_at                  :datetime         not null
+#  id                       :integer          not null, primary key
+#  applicant_id             :integer          not null
+#  application_id           :integer          not null
+#  program                  :string
+#  department               :string
+#  previous_uoft_experience :text
+#  yip                      :integer
+#  annotation               :string
+#  created_at               :datetime         not null
+#  updated_at               :datetime         not null
 #
 # Indexes
 #
