@@ -23,7 +23,7 @@ end
 #  end_date             :datetime
 #  created_at           :datetime         not null
 #  updated_at           :datetime         not null
-#  contract_template_id :integer
+#  contract_template_id :integer          not null
 #
 # Indexes
 #
