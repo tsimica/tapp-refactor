@@ -1,5 +1,6 @@
 class ContractTemplate < ApplicationRecord
-  belongs_to :session
+    belongs_to :session
+    scope :by_session, ->(session_id) { where(session_id: session_id).order(:id) }
 end
 
 # == Schema Information
