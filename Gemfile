@@ -36,4 +36,6 @@ gem 'combine_pdf'
 gem 'liquid'
 gem 'wicked_pdf'
 
-gem "lograge"
+# gem 'lograge'
+# gem 'fast_jsonapi'
+gem 'active_model_serializers', '~> 0.10.0'
