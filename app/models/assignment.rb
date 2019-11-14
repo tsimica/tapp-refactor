@@ -1,6 +1,15 @@
 class Assignment < ApplicationRecord
-  belongs_to :position
-  belongs_to :applicant
+    has_many :offers
+    has_many :wage_chunks
+    belongs_to :applicant
+    belongs_to :position
+
+    validates_uniqueness_of :applicant_id, scope: [:position_id]
+
+    scope :by_position, ->(position_id) { where(position_id: position_id).order(:id) }
+
+    # TODO: Implement this behaviour
+    def active_offer; end 
 end
 
 # == Schema Information

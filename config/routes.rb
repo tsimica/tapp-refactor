@@ -19,6 +19,9 @@ Rails.application.routes.draw do
 
             # Applicants
             resources :applicants, only: [:index, :show]
+
+            # Assignments
+            resources :assignments, only: [:show, :create]
         end
     end
 end
