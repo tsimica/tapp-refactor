@@ -34,14 +34,11 @@ class Api::V1::ApplicationsController < ApplicationController
     end
 
     def update
-        ActiveRecord::Base.transaction do
+        start_transaction do
             @application.update!(application_update_params)
             @application.applicant_data_for_matching
                         .update!(applicant_data_for_matching_params)
             render_success application.as_json
-        rescue StandardError => e
-            render_error(message: e.message)
-            raise ActiveRecord::Rollback
         end
     end
 end
