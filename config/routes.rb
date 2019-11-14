@@ -13,8 +13,11 @@ Rails.application.routes.draw do
             # Contract Templates
             get '/available_contract_templates' => 'contract_templates#available'
 
-            # Application routes
+            # Application
             resources :applications, only: [:index, :create]
+
+            # Applicants
+            resources :applicants, only: [:index, :show]
         end
     end
 end
