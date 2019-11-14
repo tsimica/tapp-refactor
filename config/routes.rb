@@ -6,8 +6,9 @@ Rails.application.routes.draw do
                 collection do
                     post :delete, to: 'sessions#delete'
                 end
-                resources :contract_templates, only: [:index, :create]
+                resources :applicants, only: [:index]
                 resources :applications, only: [:index, :create]
+                resources :contract_templates, only: [:index, :create]
             end
 
             # Contract Templates
