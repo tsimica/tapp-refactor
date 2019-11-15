@@ -1,5 +1,12 @@
+# frozen_string_literal: true
+
+# A class representing a wage chunk for an assignment.
 class WageChunk < ApplicationRecord
-  belongs_to :assignment
+    has_and_belongs_to_many :reporting_tags
+    belongs_to :assignment
+
+    validates :hours, numericality: { only_float: true }, allow_nil: true
+    validates :rate, numericality: { only_float: true }, allow_nil: true
 end
 
 # == Schema Information
