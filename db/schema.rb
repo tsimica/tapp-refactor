@@ -85,6 +85,13 @@ ActiveRecord::Schema.define(version: 2019_11_15_081814) do
     t.index ["utorid"], name: "index_instructors_on_utorid", unique: true
   end
 
+  create_table "instructors_positions", force: :cascade do |t|
+    t.bigint "instructor_id"
+    t.bigint "position_id"
+    t.index ["instructor_id"], name: "index_instructors_positions_on_instructor_id"
+    t.index ["position_id"], name: "index_instructors_positions_on_position_id"
+  end
+
   create_table "offers", force: :cascade do |t|
     t.bigint "assignment_id", null: false
     t.string "offer_template"
@@ -111,6 +118,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_081814) do
     t.string "url_token"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "status", default: 0, null: false
     t.index ["assignment_id"], name: "index_offers_on_assignment_id"
     t.index ["url_token"], name: "index_offers_on_url_token"
   end
