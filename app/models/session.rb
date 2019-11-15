@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# A class representing a school term. For example, "fall 2018".
 class Session < ApplicationRecord
     has_many :applications
     has_many :contract_templates
