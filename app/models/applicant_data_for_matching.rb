@@ -1,6 +1,8 @@
 class ApplicantDataForMatching < ApplicationRecord
-  belongs_to :applicant
-  belongs_to :application
+    belongs_to :applicant
+    belongs_to :application
+
+    validates :yip, numericality: true, allow_nil: true
 end
 
 # == Schema Information
