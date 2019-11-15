@@ -1,7 +1,49 @@
-class Offer < ApplicationRecord
-  belongs_to :assignment
-end
+# frozen_string_literal: true
 
+class Offer < ApplicationRecord
+    OFFER_STATUS = %i[active accepted rejected withdrawn].freeze
+    belongs_to :assignment
+
+    has_secure_token :url_token
+    enum status: OFFER_STATUS
+
+    scope :inactive_offers, -> { where.not(status: :active) }
+    scope :withdraw_offers, lambda {
+        update_all(status: :withdrawn, widthdrawn_date: Time.zone.now)
+    }
+
+    before_create :populate_offer
+    before_update :set_status_update_date
+
+    private
+
+    def default_status
+        OFFER_STATUS.first
+    end
+
+    def populate_offer
+        applicant_attrs = %i[first_name last_name email]
+        applicant = assignment.applicant.as_json(only: applicant_attrs)
+
+        position_attrs = %i[position_code position_title position_start_date
+                            position_end_date]
+        position = applicant.as_json(only: position_attrs)
+        self.attributes = attributes.merge!(applicant, position)
+    end
+
+    def set_status_update_date
+        if status_changed? && status_was == default_status.to_s
+            case status.to_sym
+            when :accepted
+                self.accepted_date = Time.zone.now
+            when :rejected
+                self.rejected_date = Time.zone.now
+            when :withdrawn
+                self.withdrawn_date = Time.zone.now
+            end
+        end
+    end
+end
 # == Schema Information
 #
 # Table name: offers
@@ -32,6 +74,14 @@ end
 #  url_token               :string
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
+#  status                  :integer          default("0"), not null
+#
+# Indexes
+#
+#  index_offers_on_assignment_id  (assignment_id)
+#  index_offers_on_url_token      (url_token)
+#
+
 #
 # Indexes
 #
