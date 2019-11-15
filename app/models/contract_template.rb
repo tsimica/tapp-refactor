@@ -1,6 +1,14 @@
+# frozen_string_literal: true
+
+# A class representing a position template, which represents the
+# location of the template associated with a position contract.
 class ContractTemplate < ApplicationRecord
     belongs_to :session
-    scope :by_session, ->(session_id) { where(session_id: session_id).order(:id) }
+
+    scope :by_session, lambda(session_id) {
+        where(session_id: session_id)
+            .order(:id)
+    }
 end
 
 # == Schema Information
