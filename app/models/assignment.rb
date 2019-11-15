@@ -1,15 +1,17 @@
+# frozen_string_literal: true
+
+# A class representing an assignment. This class has many offers and belongs to
+# applicant and position.
 class Assignment < ApplicationRecord
     has_many :offers
     has_many :wage_chunks
+    has_one :active_offer, class_name: 'Offer'
     belongs_to :applicant
     belongs_to :position
 
     validates_uniqueness_of :applicant_id, scope: [:position_id]
 
     scope :by_position, ->(position_id) { where(position_id: position_id).order(:id) }
-
-    # TODO: Implement this behaviour
-    def active_offer; end 
 end
 
 # == Schema Information

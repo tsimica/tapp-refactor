@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::AssignmentsController < ApplicationController
     before_action :find_assignment, only: %i[show]
 
