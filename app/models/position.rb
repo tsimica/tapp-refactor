@@ -1,6 +1,18 @@
+# frozen_string_literal: true
+
 class Position < ApplicationRecord
+    has_and_belongs_to_many :instructors
+    has_and_belongs_to_many :reporting_tags
+    has_many :assignments
+    has_many :position_preferences
+    has_many :applications, through: :position_preferences
+    has_one :position_data_for_ad
+    has_one :position_data_for_matching
     belongs_to :session
     belongs_to :contract_template
+
+    validates :hours_per_assignment, numericality: { only_float: true }, allow_nil: true
+    validates :position_code, presence: true, uniqueness: { scope: :session }
 end
 
 # == Schema Information
