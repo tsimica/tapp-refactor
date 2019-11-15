@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_10_222727) do
+ActiveRecord::Schema.define(version: 2019_11_15_081814) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -163,6 +163,13 @@ ActiveRecord::Schema.define(version: 2019_11_10_222727) do
     t.index ["session_id"], name: "index_positions_on_session_id"
   end
 
+  create_table "positions_reporting_tags", force: :cascade do |t|
+    t.bigint "reporting_tag_id"
+    t.bigint "position_id"
+    t.index ["position_id"], name: "index_positions_reporting_tags_on_position_id"
+    t.index ["reporting_tag_id"], name: "index_positions_reporting_tags_on_reporting_tag_id"
+  end
+
   create_table "reporting_tags", force: :cascade do |t|
     t.bigint "position_id", null: false
     t.bigint "wage_chunk_id", null: false
@@ -171,6 +178,13 @@ ActiveRecord::Schema.define(version: 2019_11_10_222727) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["position_id"], name: "index_reporting_tags_on_position_id"
     t.index ["wage_chunk_id"], name: "index_reporting_tags_on_wage_chunk_id"
+  end
+
+  create_table "reporting_tags_wage_chunks", force: :cascade do |t|
+    t.bigint "reporting_tag_id"
+    t.bigint "wage_chunk_id"
+    t.index ["reporting_tag_id"], name: "index_reporting_tags_wage_chunks_on_reporting_tag_id"
+    t.index ["wage_chunk_id"], name: "index_reporting_tags_wage_chunks_on_wage_chunk_id"
   end
 
   create_table "sessions", force: :cascade do |t|
