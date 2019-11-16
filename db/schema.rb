@@ -44,17 +44,19 @@ ActiveRecord::Schema.define(version: 2019_11_15_081814) do
 
   create_table "applications", force: :cascade do |t|
     t.bigint "session_id", null: false
+    t.bigint "applicant_id", null: false
     t.text "comments"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["applicant_id"], name: "index_applications_on_applicant_id"
     t.index ["session_id"], name: "index_applications_on_session_id"
   end
 
   create_table "assignments", force: :cascade do |t|
     t.bigint "position_id", null: false
     t.bigint "applicant_id", null: false
-    t.datetime "contract_start_date"
-    t.datetime "contract_end_date"
+    t.datetime "start_date"
+    t.datetime "end_date"
     t.text "note"
     t.string "offer_override_pdf"
     t.datetime "created_at", precision: 6, null: false
@@ -226,6 +228,7 @@ ActiveRecord::Schema.define(version: 2019_11_15_081814) do
 
   add_foreign_key "applicant_data_for_matchings", "applicants"
   add_foreign_key "applicant_data_for_matchings", "applications"
+  add_foreign_key "applications", "applicants"
   add_foreign_key "applications", "sessions"
   add_foreign_key "assignments", "applicants"
   add_foreign_key "assignments", "offers", column: "active_offer_id"
