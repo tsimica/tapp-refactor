@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::V1::ApplicantsController < ApplicationController
-    before_action :find_applicant, only: %i[show delete]
+    before_action :find_applicant, only: :show
 
     # GET /applicants
     def index
@@ -16,7 +16,7 @@ class Api::V1::ApplicantsController < ApplicationController
 
     # POST /applicants
     def create
-        @applicant = Applicant.find_by(id: params[:session_id])
+        @applicant = Applicant.find_by(id: params[:id])
         update and return if @application
         @session = Applicant.new(applicant_params)
         render_on_condition(object: @applicant,
