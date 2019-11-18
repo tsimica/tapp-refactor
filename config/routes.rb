@@ -12,8 +12,9 @@ Rails.application.routes.draw do
             # Assignments
             resources :assignments, only: %i[show create] do
                 resources :wage_chunks, controller: 'assignment_wage_chunks', only: %i[index create]
-                resources :offers, controller: 'active_offers', only: %i[show create] do
+                resources :offers, path: 'active_offer', controller: 'active_offers', only: :index do
                     collection do
+                        post 'create'
                         post :accept
                         post :reject
                         post :withdraw

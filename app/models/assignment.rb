@@ -5,7 +5,8 @@
 class Assignment < ApplicationRecord
     has_many :offers
     has_many :wage_chunks
-    has_one :active_offer, class_name: 'Offer'
+
+    belongs_to :active_offer, class_name: 'Offer', optional: true
     belongs_to :applicant
     belongs_to :position
 

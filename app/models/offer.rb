@@ -1,25 +1,21 @@
 # frozen_string_literal: true
 
 class Offer < ApplicationRecord
-    OFFER_STATUS = %i[active accepted rejected withdrawn].freeze
+    OFFER_STATUS = %i[pending accepted rejected withdrawn].freeze
     belongs_to :assignment
 
     has_secure_token :url_token
     enum status: OFFER_STATUS
 
-    scope :inactive_offers, -> { where.not(status: :active) }
-    scope :withdraw_offers, lambda {
-        update_all(status: :withdrawn, widthdrawn_date: Time.zone.now)
+    scope :inactive_offers, -> { where.not(status: :pending) }
+    scope :withdraw_all, lambda {
+        update_all(status: :withdrawn, withdrawn_date: Time.zone.now)
     }
 
     before_create :populate_offer
-    before_update :set_status_update_date
+    before_update :set_status_date
 
     private
-
-    def default_status
-        OFFER_STATUS.first
-    end
 
     def populate_offer
         applicant_attrs = %i[first_name last_name email]
@@ -28,11 +24,12 @@ class Offer < ApplicationRecord
         position_attrs = %i[position_code position_title position_start_date
                             position_end_date]
         position = applicant.as_json(only: position_attrs)
+
         self.attributes = attributes.merge!(applicant, position)
     end
 
-    def set_status_update_date
-        if status_changed? && status_was == default_status.to_s
+    def set_status_date
+        if status_changed?
             case status.to_sym
             when :accepted
                 self.accepted_date = Time.zone.now
