@@ -18,15 +18,4 @@ module Response
             render_error object.errors.full_messages.join('; ')
         end
     end
-
-    def invalid_id?(table, params_key, payload = {})
-        table.find(params[param_key])
-        false
-    rescue ArgumentError
-        render_error("'#{params[params_key]}' is not a valid id.", payload)
-        true
-    rescue ActiveRecord::RecordNotFound => e
-        render_error(e.message, payload)
-        true
-    end
 end
