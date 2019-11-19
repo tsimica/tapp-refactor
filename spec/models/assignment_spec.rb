@@ -1,7 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Assignment, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+    describe 'associations' do
+        it { should have_many(:offers) }
+        it { should have_many(:wage_chunks) }
+        # it { should belong_to(:active_offer) }
+        it { should belong_to(:applicant) }
+        it { should belong_to(:position) }
+    end
 end
 
 # == Schema Information
