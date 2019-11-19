@@ -9,7 +9,6 @@ class AssignmentWageChunkCreateService
     def initialize(assignment:, wage_chunk_params:)
         @assignment = assignment
         @wage_chunks = wage_chunk_params
-        @success = false
         @returned_wage_chunks ||= []
     end
 
