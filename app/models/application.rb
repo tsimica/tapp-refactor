@@ -4,6 +4,7 @@
 class Application < ApplicationRecord
     has_many :position_preferences
     has_many :positions, through: :position_preferences
+    has_one :applicant_data_for_matching
     belongs_to :applicant
 
     belongs_to :session
