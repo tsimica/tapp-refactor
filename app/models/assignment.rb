@@ -3,6 +3,9 @@
 # A class representing an assignment. This class has many offers and belongs to
 # applicant and position.
 class Assignment < ApplicationRecord
+    ACTIVE_OFFER_STATUS = %i[pending accepted rejected withdrawn].freeze
+    enum active_offer_status: ACTIVE_OFFER_STATUS
+
     has_many :offers
     has_many :wage_chunks, dependent: :delete_all
 
@@ -22,10 +25,11 @@ end
 #  id                  :integer          not null, primary key
 #  position_id         :integer          not null
 #  applicant_id        :integer          not null
-#  contract_start_date :datetime
-#  contract_end_date   :datetime
+#  start_date          :datetime
+#  end_date            :datetime
 #  note                :text
 #  offer_override_pdf  :string
+#  active_offer_status :integer          default("0"), not null
 #  created_at          :datetime         not null
 #  updated_at          :datetime         not null
 #  active_offer_id     :integer
