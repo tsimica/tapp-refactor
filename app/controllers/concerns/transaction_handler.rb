@@ -1,12 +1,13 @@
+# frozen_string_literal: true
+
 module TransactionHandler
     extend ActiveSupport::Concern
 
-    def start_transaction(&block)
+    def start_transaction_and_rollback_on_exception
         ActiveRecord::Base.transaction do
-            block.call
-        rescue StandardError => e
-            render_error(message: e.errors)
-            raise ActiveRecord::Rollback
+            yield
+        rescue => e
+            render_error(message: e.message)
         end
     end
 end

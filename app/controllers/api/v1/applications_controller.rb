@@ -13,7 +13,7 @@ class Api::V1::ApplicationsController < ApplicationController
     def create
         @application = Application.find_by(id: params[:application_id])
         update and return if @application.present?
-        start_transaction do
+        start_transaction_and_rollback_on_exception do
             application = Application.create!(application_params)
             application.create_applicant_data_for_matching!(
                 applicant_data_for_matching_params
@@ -34,7 +34,7 @@ class Api::V1::ApplicationsController < ApplicationController
     end
 
     def update
-        start_transaction do
+        start_transaction_and_rollback_on_exception do
             @application.update!(application_update_params)
             @application.applicant_data_for_matching
                         .update!(applicant_data_for_matching_params)

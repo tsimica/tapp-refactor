@@ -17,7 +17,7 @@ class Api::V1::ActiveOffersController < ApplicationController
             return
         end
 
-        start_transaction do
+        start_transaction_and_rollback_on_exception do
             offer = @assignment.offers.create!
             @assignment.update!(active_offer: offer)
             render_success @assignment
