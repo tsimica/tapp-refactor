@@ -6,17 +6,17 @@ RSpec.describe Applicant, type: :model do
     describe 'associations' do
         it { should have_many(:assignments) }
         it { should have_many(:applications) }
-        it { should have_one(:applicant_data_for_matchings) }
+        it { should have_one(:applicant_data_for_matching) }
     end
 
     describe 'validations' do
-        it { should validates_presence_of(:first_name) }
-        it { should validates_presence_of(:last_name) }
-        it { should validates_presence_of(:email) }
-        it { should validates_presence_of(:student_number) }
-        it { should validates_presence_of(:utorid) }
-        it { should validate_uniqueness_of(:student_number) }
-        it { should validate_uniqueness_of(:utorid) }
+        it { should validate_presence_of(:first_name) }
+        it { should validate_presence_of(:last_name) }
+        it { should validate_presence_of(:email) }
+        it { should validate_presence_of(:student_number) }
+        it { should validate_presence_of(:utorid) }
+        # it { should validate_uniqueness_of(:student_number) }
+        # it { should validate_uniqueness_of(:utorid) }
     end
 end
 
