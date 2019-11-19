@@ -1,7 +1,23 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
 RSpec.describe Applicant, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+    describe 'associations' do
+        it { should have_many(:assignments) }
+        it { should have_many(:applications) }
+        it { should have_one(:applicant_data_for_matchings) }
+    end
+
+    describe 'validations' do
+        it { should validates_presence_of(:first_name) }
+        it { should validates_presence_of(:last_name) }
+        it { should validates_presence_of(:email) }
+        it { should validates_presence_of(:student_number) }
+        it { should validates_presence_of(:utorid) }
+        it { should validate_uniqueness_of(:student_number) }
+        it { should validate_uniqueness_of(:utorid) }
+    end
 end
 
 # == Schema Information
