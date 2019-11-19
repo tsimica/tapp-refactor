@@ -32,3 +32,6 @@
 en:
   active_offers:
     already_exists: "An active offer already exists for this assignment."
+  assignment_wage_chunk_service:
+    wage_chunk_missing:
+      message: "You must provide wage chunk(s) to insert."

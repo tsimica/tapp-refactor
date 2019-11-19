@@ -10,10 +10,12 @@ class Api::V1::AssignmentWageChunksController < ApplicationController
 
     # POST /wage_chunks
     def create
-        wage_chunk_ids = @assignment.wage_chunks
-                                    .upsert_all(wage_chunks_create_params,
-                                                returning: :id)
-        WageChunk.where(id: wage_chunk_ids)
+        service = AssignmentWageChunkCreateService.new(assignment: @assignment,
+                                                       wage_chunk_params: wage_chunks_create_params)
+        start_transaction_and_rollback_on_exception do
+            service.perform
+            render_success service.values
+        end
     end
 
     private
@@ -23,6 +25,6 @@ class Api::V1::AssignmentWageChunksController < ApplicationController
     end
 
     def wage_chunks_create_params
-        params.permit(%i[id start_date end_date hours rate])
+        params.permit(_json: %i[id start_date end_date hours rate]).dig(:_json)
     end
 end
