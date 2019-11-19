@@ -1,4 +1,4 @@
-class PositionSerializer < ApplicationSerializer
+class PositionSerializer < ActiveModel::Serializer
     attributes :id, :position_code, :position_title, :hours_per_assignment,
                :start_date, :end_date, :duties, :qualifications, 
                :ad_hours_per_assignment, :ad_num_assignments, :ad_open_date, 

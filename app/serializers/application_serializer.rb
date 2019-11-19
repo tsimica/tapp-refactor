@@ -1,4 +1,6 @@
-class ApplicationSerializer < ActiveModel::Serializer
+# frozen_string_literal: true
+
+class ApplicationsSerializer < ActiveModel::Serializer
     attributes :id, :comments, :program, :department, :previous_uoft_experience,
                :yip, :annotation
 
