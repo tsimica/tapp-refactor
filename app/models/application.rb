@@ -6,7 +6,6 @@ class Application < ApplicationRecord
     has_many :positions, through: :position_preferences
     has_one :applicant_data_for_matching
     belongs_to :applicant
-
     belongs_to :session
 
     scope :all_applications, -> { includes(:applicant_data_for_matching).all.order(:id) }

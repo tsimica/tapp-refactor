@@ -8,7 +8,6 @@ class Assignment < ApplicationRecord
 
     has_many :offers
     has_many :wage_chunks, dependent: :delete_all
-
     belongs_to :active_offer, class_name: 'Offer', optional: true
     belongs_to :applicant
     belongs_to :position
