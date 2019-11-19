@@ -4,7 +4,9 @@ class Api::V1::AssignmentsController < ApplicationController
     before_action :find_assignment, only: %i[show]
 
     # GET /assignments/:assignment_id
-    def show; end
+    def show
+        render_success @assignment
+    end
 
     # POST /assignments
     def create
@@ -18,7 +20,7 @@ class Api::V1::AssignmentsController < ApplicationController
     private
 
     def find_assignment
-        @assignment = Assignment.find(params[:assignment_id])
+        @assignment = Assignment.find(params[:id])
     end
 
     def assignment_params
