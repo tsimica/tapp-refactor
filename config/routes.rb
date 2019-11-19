@@ -7,7 +7,7 @@ Rails.application.routes.draw do
             resources :applicants, only: %i[index show create]
 
             # Application
-            resources :applications, only: %i[index create]
+            resources :applications, only: :create
 
             # Assignments
             resources :assignments, only: %i[show create] do
@@ -47,7 +47,7 @@ Rails.application.routes.draw do
                     post :delete, to: 'sessions#delete'
                 end
                 resources :applicants, only: %i[index]
-                resources :applications, only: %i[index create]
+                resources :applications, only: %i[index]
                 resources :assignments, only: %i[index]
                 resources :contract_templates, only: %i[index create]
                 resources :positions, controller: 'session_positions', only: %i[index create]
