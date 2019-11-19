@@ -5,16 +5,6 @@ module ExceptionHandler
     extend ActiveSupport::Concern
 
     included do
-        rescue_from ActiveRecord::RecordNotFound do |e|
-            render_error(message: e.message)
-        end
-
-        rescue_from ActiveRecord::RecordInvalid do |e|
-            render_error(message: e.message)
-        end
-
-        rescue_from ActionController::ParameterMissing do |e|
-            render_error(message: e.message)
-        end
+        rescue_from(StandardError) { |e| render_error(message: e.message) }
     end
 end
