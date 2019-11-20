@@ -7,6 +7,28 @@ class WageChunk < ApplicationRecord
 
     validates :hours, numericality: { only_float: true }, allow_nil: true
     validates :rate, numericality: { only_float: true }, allow_nil: true
+
+    before_save :set_rates
+
+    private
+
+    def set_rates
+        session = assignment.position.session
+        # Apply Session rate1 as the rate only if there is no Session rate2 set
+        if session.rate1 && session.rate2.blank? && rate != session.rate1
+            self.rate = session.rate1
+            return
+        end
+
+        # Apply Session rate1 or rate2 depending on the time of year
+        if session.rate1 && session.rate2
+            self.rate = if Time.zone.now.end_of_year >= end_date
+                            session.rate1
+                        else
+                            session.rate2
+                        end
+        end
+    end
 end
 
 # == Schema Information
