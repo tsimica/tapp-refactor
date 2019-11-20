@@ -244,5 +244,5 @@ ActiveRecord::Schema.define(version: 2019_11_15_081814) do
   add_foreign_key "positions", "sessions"
   add_foreign_key "reporting_tags", "positions"
   add_foreign_key "reporting_tags", "wage_chunks"
-  add_foreign_key "wage_chunks", "assignments"
+  add_foreign_key "wage_chunks", "assignments", on_delete: :cascade
 end
