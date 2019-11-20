@@ -15,6 +15,40 @@ class Assignment < ApplicationRecord
     validates_uniqueness_of :applicant_id, scope: [:position_id]
 
     scope :by_position, ->(position_id) { where(position_id: position_id).order(:id) }
+
+    after_create :split_and_create_wage_chunks
+
+    private
+
+    def split_and_create_wage_chunks
+        start_date = self.start_date
+        end_date = self.end_date
+        if start_date.blank? && end_date.blank?
+            start_date = position.start_date
+            end_date = position.end_date
+        end
+
+        return unless start_date && end_date
+
+        wage_chunks.delete_all
+        assignment_hours = position.hours_per_assignment
+        return unless assignment_hours
+
+        if end_date.year > start_date.year
+            boundary_date = start_date.end_of_year
+            assignment_hours_split = assignment_hours / 2.to_f
+            wage_chunks.create!([{ start_date: start_date,
+                                   end_date: boundary_date,
+                                   hours: assignment_hours_split },
+                                 { start_date: (boundary_date + 1.day)
+                                               .beginning_of_year,
+                                   end_date: end_date,
+                                   hours: assignment_hours_split }])
+        else
+            wage_chunks.create!(start_date: start_date, end_date: end_date,
+                                hours: assigment_hours)
+        end
+    end
 end
 
 # == Schema Information
