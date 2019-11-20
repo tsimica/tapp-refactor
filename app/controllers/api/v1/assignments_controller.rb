@@ -1,10 +1,9 @@
 # frozen_string_literal: true
 
 class Api::V1::AssignmentsController < ApplicationController
-    before_action :find_assignment, only: %i[show]
-
     # GET /assignments/:assignment_id
     def show
+        @assignment = Assignment.find(params[:id])
         render_success @assignment
     end
 
@@ -19,12 +18,8 @@ class Api::V1::AssignmentsController < ApplicationController
 
     private
 
-    def find_assignment
-        @assignment = Assignment.find(params[:id])
-    end
-
     def assignment_params
-        params.permit(:start_date, :end_date, :note, :offer_override_pdf,
-                      :actiive_offer_status)
+        params.permit(:applicant_id, :position_id, :start_date, :end_date,
+                      :note, :offer_override_pdf, :active_offer_status)
     end
 end
