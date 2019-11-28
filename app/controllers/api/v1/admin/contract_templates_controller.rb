@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Controller for ContractTemplates
-class Api::V1::ContractTemplatesController < ApplicationController
+class Api::V1::Admin::ContractTemplatesController < ApplicationController
     # GET /contract_templates
     def index
         render_success ContractTemplate.by_session(params[:id])

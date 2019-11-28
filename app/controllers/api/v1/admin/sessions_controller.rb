@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::SessionsController < ApplicationController
+class Api::V1::Admin::SessionsController < ApplicationController
     # GET /sessions
     def index
         render_success Session.order(:id)

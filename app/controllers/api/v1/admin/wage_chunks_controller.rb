@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::WageChunksController < ApplicationController
+class Api::V1::Admin::WageChunksController < ApplicationController
     # POST /wage_chunks
     def create
         wage_chunk_id = WageChunk.upsert!(wage_chunks_create_params,

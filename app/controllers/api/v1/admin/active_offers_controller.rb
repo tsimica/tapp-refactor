@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::ActiveOffersController < ApplicationController
+class Api::V1::Admin::ActiveOffersController < ApplicationController
     before_action :find_assignment
 
     # GET /active_offers

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::SessionPositionsController < ApplicationController
+class Api::V1::Admin::SessionPositionsController < ApplicationController
     before_action :find_session
 
     # GET /positions

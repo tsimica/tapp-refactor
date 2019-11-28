@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::InstructorsController < ApplicationController
+class Api::V1::Admin::InstructorsController < ApplicationController
     # GET /instructors
     def index
         render_success Instructor.all

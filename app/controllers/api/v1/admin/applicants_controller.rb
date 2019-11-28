@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::ApplicantsController < ApplicationController
+class Api::V1::Admin::ApplicantsController < ApplicationController
     before_action :find_applicant, only: :show
 
     # GET /applicants

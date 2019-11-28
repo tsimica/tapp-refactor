@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::PositionsController < ApplicationController
+class Api::V1::Admin::PositionsController < ApplicationController
     before_action :find_position
 
     # POST /positions

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::AssignmentsController < ApplicationController
+class Api::V1::Admin::AssignmentsController < ApplicationController
     # GET /assignments/:assignment_id
     def show
         @assignment = Assignment.find(params[:id])

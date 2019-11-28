@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Controller for Applications
-class Api::V1::ApplicationsController < ApplicationController
+class Api::V1::Admin::ApplicationsController < ApplicationController
     include TransactionHandler
 
     # GET /applications

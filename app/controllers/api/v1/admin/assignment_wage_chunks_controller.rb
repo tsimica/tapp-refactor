@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::AssignmentWageChunksController < ApplicationController
+class Api::V1::Admin::AssignmentWageChunksController < ApplicationController
     before_action :find_assignment
 
     # GET /wage_chunks
