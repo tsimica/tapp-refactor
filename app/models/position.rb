@@ -13,6 +13,7 @@ class Position < ApplicationRecord
 
     validates :hours_per_assignment, numericality: { only_float: true }, allow_nil: true
     validates :position_code, presence: true, uniqueness: { scope: :session }
+    validates :start_date, :end_date, presence: true
 end
 
 # == Schema Information
