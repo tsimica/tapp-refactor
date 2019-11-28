@@ -30,7 +30,6 @@ class Assignment < ApplicationRecord
 
         return unless start_date && end_date
 
-        wage_chunks.delete_all
         assignment_hours = position.hours_per_assignment
         return unless assignment_hours
 
